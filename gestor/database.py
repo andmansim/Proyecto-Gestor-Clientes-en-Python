@@ -1,3 +1,5 @@
+import csv 
+import config
 class Cliente: #coge los datos y los devuelve
     def __init__(self, dni, nombre, apellido):
         self.dni = dni
@@ -13,7 +15,7 @@ class Clientes: #Se encargará de uscar, crear, actualizar y borrar clientes
     #Recogerá todos los datos dni, nombre y apellidos
     lista = []
     # Creamos la lista y cargamos los clientes en memoria
-    with open("clientes.csv", newline="\n") as fichero:
+    with open(config.DATABASE_PATH, newline="\n") as fichero:
         reader = csv.reader(fichero, delimiter=";")
         for dni, nombre, apellido in reader:
             cliente = Cliente(dni, nombre, apellido)
@@ -49,6 +51,9 @@ class Clientes: #Se encargará de uscar, crear, actualizar y borrar clientes
                 Clientes.guardar()
                 return cliente
             
-   ''' @staticmethod
+    @staticmethod
     def guardar():
-        with open()'''
+        with open(config.DATABASE_PATH, "w", newline="\n") as fichero:
+            writer = csv.writer(fichero, delimiter=";")
+            for c in Clientes.lista:
+                writer.writerow((c.dni, c.nombre, c.apellido))
