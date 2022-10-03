@@ -4,8 +4,10 @@ import helpers
 import config
 import csv
 import database as db
+
 # el unittest.TestCase es para que pase todos los datos de los test a esta clase
 class TestDatabase(unittest.TestCase):
+    
     def setUp(self): #Es un método de Python
         #se ejecuta antes de cada prueba
         db.Clientes.lista = [
@@ -37,7 +39,8 @@ class TestDatabase(unittest.TestCase):
     def test_borrar_cliente(self):
         cliente_borrado = db.Clientes.borrar('48H')
         cliente_rebuscado = db.Clientes.buscar('48H')
-        self.assertNotEqual(cliente_borrado, cliente_rebuscado)
+        self.assertEqual(cliente_borrado.dni, '48H')
+        self.assertNotEqual(cliente_rebuscado)
 
     def test_dni_valido(self):
         self.assertTrue(helpers.dni_valido('00A', db.Clientes.lista))
@@ -49,7 +52,7 @@ class TestDatabase(unittest.TestCase):
     def test_escritura_csv(self):
         db.Clientes.borrar('48H')
         db.Clientes.borrar('15J')
-        db.Clientes.modificar('28Z', 'Mariana', 'Pérez')
+        db.Clientes.modificar('28Z', 'Mariana', 'García')
         
         dni, nombre, apellido = None, None, None
         with open(config.DATABASE_PATH, newline="\n") as fichero:
@@ -57,7 +60,7 @@ class TestDatabase(unittest.TestCase):
             dni, nombre, apellido = next(reader) # Primera línea del iterador
         self.assertEqual(dni, '28Z')
         self.assertEqual(nombre, 'Mariana')
-        self.assertEqual(apellido, 'Pérez')
+        self.assertEqual(apellido, 'García')
 
 if __name__== '__main__':
     unittest.main()

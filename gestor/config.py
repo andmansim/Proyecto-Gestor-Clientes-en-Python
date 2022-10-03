@@ -1,4 +1,5 @@
 import sys
+
 DATABASE_PATH = 'clientes.csv'
 #lo ponemos aquí pq antes nos daba problemas
 #pq antes las pruebaS nos modificaban el fichero csv, por eso lo hacemos constante

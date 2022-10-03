@@ -4,7 +4,8 @@ import database as db
 
 def iniciar():
      while True:
-        os.system('clear') # cls en Windows
+        helpers.limpiar_pantalla()
+        
         print("========================")
         print(" BIENVENIDO AL Manager ")
         print("========================")
@@ -33,6 +34,7 @@ def iniciar():
         if opcion == '3':
             print("Añadiendo un cliente...\n")
             # Comprobación de DNI válido
+            dni = None
             while 1:
                 dni = helpers.leer_texto(3, 3, "DNI (2 ints y 1 char)").upper()
                 if helpers.dni_valido(dni, db.Clientes.lista):

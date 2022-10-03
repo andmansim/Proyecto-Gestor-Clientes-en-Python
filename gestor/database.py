@@ -1,15 +1,17 @@
 import csv 
 import config
+
 class Cliente: #coge los datos y los devuelve
     def __init__(self, dni, nombre, apellido):
         self.dni = dni
         self.nombre = nombre
-        self.apllido = apellido
+        self.apellido = apellido
     
     def __str__(self): #Nos devuelve una cadena de caracteres, como si fuese el getter
         return f"({self.dni}) {self.nombre} {self.apellido}"
     
-    
+    def to_dict(self):
+        return {'dni': self.dni, 'nombre': self.nombre, 'apellido' : self.apellido}
 class Clientes: #Se encargará de uscar, crear, actualizar y borrar clientes
     #lista de clientes
     #Recogerá todos los datos dni, nombre y apellidos
