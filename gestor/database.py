@@ -12,6 +12,13 @@ class Clientes: #Se encargará de uscar, crear, actualizar y borrar clientes
     #lista de clientes
     #Recogerá todos los datos dni, nombre y apellidos
     lista = []
+    # Creamos la lista y cargamos los clientes en memoria
+    with open("clientes.csv", newline="\n") as fichero:
+        reader = csv.reader(fichero, delimiter=";")
+        for dni, nombre, apellido in reader:
+            cliente = Cliente(dni, nombre, apellido)
+            lista.append(cliente)
+            
     @staticmethod #Se le pone a los métodos q llamamos mucho, donde solo nos guarda lo último
     def buscar(dni):
         for cliente in Clientes.lista: #busca en la lista que hemos creado antes
